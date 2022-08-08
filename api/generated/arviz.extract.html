@@ -1,0 +1,3122 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>arviz.extract &#8212; ArviZ dev documentation</title>
+<script>
+  document.documentElement.dataset.mode = localStorage.getItem("mode") || "light";
+  document.documentElement.dataset.theme = localStorage.getItem("theme") || "light"
+</script>
+
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=92025949c220c2e29695" rel="stylesheet">
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=92025949c220c2e29695" rel="stylesheet">
+
+
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/plot_directive.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-codeautolink.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/jupyter-sphinx.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/thebelab.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/custom.css" />
+
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=92025949c220c2e29695">
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/thebelab-helper.js"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="https://unpkg.com/@jupyter-widgets/html-manager@^0.20.1/dist/embed-amd.js"></script>
+    <script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-W1G68W77YV"></script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-W1G68W77YV');
+            </script>
+    <link rel="shortcut icon" href="../../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="arviz.list_datasets" href="arviz.list_datasets.html" />
+    <link rel="prev" title="arviz.concat" href="arviz.concat.html" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="docsearch:language" content="None">
+  </head>
+  
+  
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="180" data-default-mode="light">
+    <div class="bd-header-announcement container-fluid" id="banner">
+      
+
+    </div>
+
+    
+    <nav class="bd-header navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main"><div class="bd-header__inner container-xl">
+
+  <div id="navbar-start">
+    
+    
+  
+
+
+<a class="navbar-brand logo" href="../../index.html">
+  
+  
+  
+  
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Logo image">
+    <img src="../../_static/logo.png" class="logo__image only-dark" alt="Logo image">
+  
+  
+</a>
+    
+    dev
+    
+  </div>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapsible" aria-controls="navbar-collapsible" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="fas fa-bars"></span>
+  </button>
+
+  
+  <div id="navbar-collapsible" class="col-lg-9 collapse navbar-collapse">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <ul id="navbar-main-elements" class="navbar-nav">
+    <li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../getting_started/index.html">
+  Getting Started
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../examples/index.html">
+  Example Gallery
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../user_guide/index.html">
+  User Guide
+ </a>
+</li>
+
+<li class="toctree-l1 current active nav-item">
+ <a class="reference internal nav-link" href="../index.html">
+  API Reference
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../community.html">
+  Community
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../../contributing/index.html">
+  Contributing
+ </a>
+</li>
+
+    
+    <li class="nav-item">
+        <a class="nav-link nav-external" href="https://www.arviz.org">About<i class="fas fa-external-link-alt"></i></a>
+    </li>
+    
+</ul>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      
+      <div class="navbar-end-item">
+        <span id="theme-switch" class="btn btn-sm btn-outline-primary navbar-btn rounded-circle">
+    <a class="theme-switch" data-mode="light"><i class="fas fa-sun"></i></a>
+    <a class="theme-switch" data-mode="dark"><i class="far fa-moon"></i></a>
+    <a class="theme-switch" data-mode="auto"><i class="fas fa-adjust"></i></a>
+</span>
+      </div>
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          <a class="nav-link" href="https://github.com/arviz-devs/arviz" rel="noopener" target="_blank" title="GitHub"><span><i class="fab fa-github-square"></i></span>
+            <label class="sr-only">GitHub</label></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="https://twitter.com/arviz_devs" rel="noopener" target="_blank" title="Twitter"><span><i class="fab fa-twitter-square"></i></span>
+            <label class="sr-only">Twitter</label></a>
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+</div>
+    </nav>
+    
+
+    <div class="bd-container container-xl">
+      <div class="bd-container__inner row">
+          
+  
+    
+
+<!-- Only show if we have sidebars configured, else just a small margin  -->
+<div class="bd-sidebar-primary col-12 col-md-3 bd-sidebar">
+  <div class="sidebar-start-items"><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <div class="bd-toc-item active">
+    <ul class="current nav bd-sidenav">
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../plots.html">
+   Plots
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="arviz.plot_autocorr.html">
+     arviz.plot_autocorr
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="arviz.plot_bpv.html">
+     arviz.plot_bpv
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="arviz.plot_compare.html">
+     arviz.plot_compare
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="arviz.plot_density.html">
+     arviz.plot_density
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="arviz.plot_dist.html">
+     arviz.plot_dist
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="arviz.plot_dist_comparison.html">
+     arviz.plot_dist_comparison
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="arviz.plot_dot.html">
+     arviz.plot_dot
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="arviz.plot_elpd.html">
+     arviz.plot_elpd
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="arviz.plot_energy.html">
+     arviz.plot_energy
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="arviz.plot_ess.html">
+     arviz.plot_ess
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="arviz.plot_forest.html">
+     arviz.plot_forest
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="arviz.plot_hdi.html">
+     arviz.plot_hdi
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="arviz.plot_kde.html">
+     arviz.plot_kde
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="arviz.plot_khat.html">
+     arviz.plot_khat
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="arviz.plot_loo_pit.html">
+     arviz.plot_loo_pit
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="arviz.plot_lm.html">
+     arviz.plot_lm
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="arviz.plot_mcse.html">
+     arviz.plot_mcse
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="arviz.plot_pair.html">
+     arviz.plot_pair
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="arviz.plot_parallel.html">
+     arviz.plot_parallel
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="arviz.plot_posterior.html">
+     arviz.plot_posterior
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="arviz.plot_ppc.html">
+     arviz.plot_ppc
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="arviz.plot_rank.html">
+     arviz.plot_rank
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="arviz.plot_separation.html">
+     arviz.plot_separation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="arviz.plot_trace.html">
+     arviz.plot_trace
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="arviz.plot_ts.html">
+     arviz.plot_ts
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="arviz.plot_violin.html">
+     arviz.plot_violin
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../stats.html">
+   Stats
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="arviz.apply_test_function.html">
+     arviz.apply_test_function
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="arviz.compare.html">
+     arviz.compare
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="arviz.hdi.html">
+     arviz.hdi
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="arviz.kde.html">
+     arviz.kde
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="arviz.loo.html">
+     arviz.loo
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="arviz.loo_pit.html">
+     arviz.loo_pit
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="arviz.psislw.html">
+     arviz.psislw
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="arviz.r2_score.html">
+     arviz.r2_score
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="arviz.summary.html">
+     arviz.summary
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="arviz.waic.html">
+     arviz.waic
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../diagnostics.html">
+   Diagnostics
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="arviz.bfmi.html">
+     arviz.bfmi
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="arviz.ess.html">
+     arviz.ess
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="arviz.rhat.html">
+     arviz.rhat
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="arviz.mcse.html">
+     arviz.mcse
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../stats_utils.html">
+   Stats utils
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" type="checkbox"/>
+  <label for="toctree-checkbox-4">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="arviz.autocov.html">
+     arviz.autocov
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="arviz.autocorr.html">
+     arviz.autocorr
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="arviz.make_ufunc.html">
+     arviz.make_ufunc
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="arviz.wrap_xarray_ufunc.html">
+     arviz.wrap_xarray_ufunc
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="../data.html">
+   Data
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" type="checkbox"/>
+  <label for="toctree-checkbox-5">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="arviz.from_cmdstan.html">
+     arviz.from_cmdstan
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="arviz.from_cmdstanpy.html">
+     arviz.from_cmdstanpy
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="arviz.from_emcee.html">
+     arviz.from_emcee
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="arviz.from_numpyro.html">
+     arviz.from_numpyro
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="arviz.from_pyjags.html">
+     arviz.from_pyjags
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="arviz.from_pymc3.html">
+     arviz.from_pymc3
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="arviz.from_pymc3_predictions.html">
+     arviz.from_pymc3_predictions
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="arviz.from_pyro.html">
+     arviz.from_pyro
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="arviz.from_pystan.html">
+     arviz.from_pystan
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="arviz.convert_to_inference_data.html">
+     arviz.convert_to_inference_data
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="arviz.convert_to_dataset.html">
+     arviz.convert_to_dataset
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="arviz.dict_to_dataset.html">
+     arviz.dict_to_dataset
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="arviz.from_dict.html">
+     arviz.from_dict
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="arviz.from_json.html">
+     arviz.from_json
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="arviz.from_netcdf.html">
+     arviz.from_netcdf
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="arviz.to_netcdf.html">
+     arviz.to_netcdf
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="arviz.concat.html">
+     arviz.concat
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     arviz.extract
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="arviz.list_datasets.html">
+     arviz.list_datasets
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="arviz.load_arviz_data.html">
+     arviz.load_arviz_data
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../inference_data.html">
+   InferenceData
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" type="checkbox"/>
+  <label for="toctree-checkbox-6">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="arviz.InferenceData.html">
+     arviz.InferenceData
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" type="checkbox"/>
+    <label for="toctree-checkbox-7">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="arviz.InferenceData.__init__.html">
+       arviz.InferenceData.__init__
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="arviz.InferenceData.add_groups.html">
+       arviz.InferenceData.add_groups
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="arviz.InferenceData.assign.html">
+       arviz.InferenceData.assign
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="arviz.InferenceData.assign_coords.html">
+       arviz.InferenceData.assign_coords
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="arviz.InferenceData.chunk.html">
+       arviz.InferenceData.chunk
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="arviz.InferenceData.compute.html">
+       arviz.InferenceData.compute
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="arviz.InferenceData.copy.html">
+       arviz.InferenceData.copy
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="arviz.InferenceData.cumsum.html">
+       arviz.InferenceData.cumsum
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="arviz.InferenceData.extend.html">
+       arviz.InferenceData.extend
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="arviz.InferenceData.from_netcdf.html">
+       arviz.InferenceData.from_netcdf
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="arviz.InferenceData.from_zarr.html">
+       arviz.InferenceData.from_zarr
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="arviz.InferenceData.get.html">
+       arviz.InferenceData.get
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="arviz.InferenceData.get_index.html">
+       arviz.InferenceData.get_index
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="arviz.InferenceData.groups.html">
+       arviz.InferenceData.groups
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="arviz.InferenceData.isel.html">
+       arviz.InferenceData.isel
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="arviz.InferenceData.items.html">
+       arviz.InferenceData.items
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="arviz.InferenceData.keys.html">
+       arviz.InferenceData.keys
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="arviz.InferenceData.load.html">
+       arviz.InferenceData.load
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="arviz.InferenceData.map.html">
+       arviz.InferenceData.map
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="arviz.InferenceData.max.html">
+       arviz.InferenceData.max
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="arviz.InferenceData.mean.html">
+       arviz.InferenceData.mean
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="arviz.InferenceData.median.html">
+       arviz.InferenceData.median
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="arviz.InferenceData.min.html">
+       arviz.InferenceData.min
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="arviz.InferenceData.persist.html">
+       arviz.InferenceData.persist
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="arviz.InferenceData.quantile.html">
+       arviz.InferenceData.quantile
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="arviz.InferenceData.rename.html">
+       arviz.InferenceData.rename
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="arviz.InferenceData.rename_dims.html">
+       arviz.InferenceData.rename_dims
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="arviz.InferenceData.rename_vars.html">
+       arviz.InferenceData.rename_vars
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="arviz.InferenceData.reset_coords.html">
+       arviz.InferenceData.reset_coords
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="arviz.InferenceData.reset_index.html">
+       arviz.InferenceData.reset_index
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="arviz.InferenceData.sel.html">
+       arviz.InferenceData.sel
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="arviz.InferenceData.set_coords.html">
+       arviz.InferenceData.set_coords
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="arviz.InferenceData.set_index.html">
+       arviz.InferenceData.set_index
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="arviz.InferenceData.sortby.html">
+       arviz.InferenceData.sortby
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="arviz.InferenceData.stack.html">
+       arviz.InferenceData.stack
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="arviz.InferenceData.sum.html">
+       arviz.InferenceData.sum
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="arviz.InferenceData.to_dataframe.html">
+       arviz.InferenceData.to_dataframe
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="arviz.InferenceData.to_dict.html">
+       arviz.InferenceData.to_dict
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="arviz.InferenceData.to_json.html">
+       arviz.InferenceData.to_json
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="arviz.InferenceData.to_netcdf.html">
+       arviz.InferenceData.to_netcdf
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="arviz.InferenceData.to_zarr.html">
+       arviz.InferenceData.to_zarr
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="arviz.InferenceData.unify_chunks.html">
+       arviz.InferenceData.unify_chunks
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="arviz.InferenceData.unstack.html">
+       arviz.InferenceData.unstack
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="arviz.InferenceData.values.html">
+       arviz.InferenceData.values
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="arviz.InferenceData.get_index.html">
+     arviz.InferenceData.get_index
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="arviz.InferenceData.to_dataframe.html">
+     arviz.InferenceData.to_dataframe
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="arviz.InferenceData.to_json.html">
+     arviz.InferenceData.to_json
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="arviz.InferenceData.from_netcdf.html">
+     arviz.InferenceData.from_netcdf
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="arviz.InferenceData.to_netcdf.html">
+     arviz.InferenceData.to_netcdf
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="arviz.InferenceData.from_zarr.html">
+     arviz.InferenceData.from_zarr
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="arviz.InferenceData.to_zarr.html">
+     arviz.InferenceData.to_zarr
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="arviz.InferenceData.chunk.html">
+     arviz.InferenceData.chunk
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="arviz.InferenceData.compute.html">
+     arviz.InferenceData.compute
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="arviz.InferenceData.load.html">
+     arviz.InferenceData.load
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="arviz.InferenceData.persist.html">
+     arviz.InferenceData.persist
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="arviz.InferenceData.unify_chunks.html">
+     arviz.InferenceData.unify_chunks
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="arviz.InferenceData.groups.html">
+     arviz.InferenceData.groups
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="arviz.InferenceData.items.html">
+     arviz.InferenceData.items
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="arviz.InferenceData.values.html">
+     arviz.InferenceData.values
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="arviz.InferenceData.add_groups.html">
+     arviz.InferenceData.add_groups
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="arviz.InferenceData.extend.html">
+     arviz.InferenceData.extend
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="arviz.InferenceData.assign.html">
+     arviz.InferenceData.assign
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="arviz.InferenceData.assign_coords.html">
+     arviz.InferenceData.assign_coords
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="arviz.InferenceData.rename.html">
+     arviz.InferenceData.rename
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="arviz.InferenceData.rename_dims.html">
+     arviz.InferenceData.rename_dims
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="arviz.InferenceData.set_coords.html">
+     arviz.InferenceData.set_coords
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="arviz.InferenceData.set_index.html">
+     arviz.InferenceData.set_index
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="arviz.InferenceData.isel.html">
+     arviz.InferenceData.isel
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="arviz.InferenceData.sel.html">
+     arviz.InferenceData.sel
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="arviz.InferenceData.reset_index.html">
+     arviz.InferenceData.reset_index
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="arviz.InferenceData.map.html">
+     arviz.InferenceData.map
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="arviz.InferenceData.cumsum.html">
+     arviz.InferenceData.cumsum
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="arviz.InferenceData.max.html">
+     arviz.InferenceData.max
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="arviz.InferenceData.mean.html">
+     arviz.InferenceData.mean
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="arviz.InferenceData.median.html">
+     arviz.InferenceData.median
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="arviz.InferenceData.min.html">
+     arviz.InferenceData.min
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="arviz.InferenceData.quantile.html">
+     arviz.InferenceData.quantile
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="arviz.InferenceData.sum.html">
+     arviz.InferenceData.sum
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="arviz.InferenceData.stack.html">
+     arviz.InferenceData.stack
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="arviz.InferenceData.unstack.html">
+     arviz.InferenceData.unstack
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../plot_utils.html">
+   Plot utils
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" type="checkbox"/>
+  <label for="toctree-checkbox-8">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="arviz.labels.BaseLabeller.html">
+     arviz.labels.BaseLabeller
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" type="checkbox"/>
+    <label for="toctree-checkbox-9">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="arviz.labels.BaseLabeller.__init__.html">
+       arviz.labels.BaseLabeller.__init__
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="arviz.labels.BaseLabeller.dim_coord_to_str.html">
+       arviz.labels.BaseLabeller.dim_coord_to_str
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="arviz.labels.BaseLabeller.make_label_flat.html">
+       arviz.labels.BaseLabeller.make_label_flat
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="arviz.labels.BaseLabeller.make_label_vert.html">
+       arviz.labels.BaseLabeller.make_label_vert
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="arviz.labels.BaseLabeller.make_model_label.html">
+       arviz.labels.BaseLabeller.make_model_label
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="arviz.labels.BaseLabeller.make_pp_label.html">
+       arviz.labels.BaseLabeller.make_pp_label
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="arviz.labels.BaseLabeller.model_name_to_str.html">
+       arviz.labels.BaseLabeller.model_name_to_str
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="arviz.labels.BaseLabeller.sel_to_str.html">
+       arviz.labels.BaseLabeller.sel_to_str
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="arviz.labels.BaseLabeller.var_name_to_str.html">
+       arviz.labels.BaseLabeller.var_name_to_str
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="arviz.labels.BaseLabeller.var_pp_to_str.html">
+       arviz.labels.BaseLabeller.var_pp_to_str
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="arviz.labels.DimCoordLabeller.html">
+     arviz.labels.DimCoordLabeller
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" type="checkbox"/>
+    <label for="toctree-checkbox-10">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="arviz.labels.DimCoordLabeller.__init__.html">
+       arviz.labels.DimCoordLabeller.__init__
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="arviz.labels.DimCoordLabeller.dim_coord_to_str.html">
+       arviz.labels.DimCoordLabeller.dim_coord_to_str
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="arviz.labels.DimCoordLabeller.make_label_flat.html">
+       arviz.labels.DimCoordLabeller.make_label_flat
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="arviz.labels.DimCoordLabeller.make_label_vert.html">
+       arviz.labels.DimCoordLabeller.make_label_vert
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="arviz.labels.DimCoordLabeller.make_model_label.html">
+       arviz.labels.DimCoordLabeller.make_model_label
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="arviz.labels.DimCoordLabeller.make_pp_label.html">
+       arviz.labels.DimCoordLabeller.make_pp_label
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="arviz.labels.DimCoordLabeller.model_name_to_str.html">
+       arviz.labels.DimCoordLabeller.model_name_to_str
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="arviz.labels.DimCoordLabeller.sel_to_str.html">
+       arviz.labels.DimCoordLabeller.sel_to_str
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="arviz.labels.DimCoordLabeller.var_name_to_str.html">
+       arviz.labels.DimCoordLabeller.var_name_to_str
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="arviz.labels.DimCoordLabeller.var_pp_to_str.html">
+       arviz.labels.DimCoordLabeller.var_pp_to_str
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="arviz.labels.IdxLabeller.html">
+     arviz.labels.IdxLabeller
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" type="checkbox"/>
+    <label for="toctree-checkbox-11">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="arviz.labels.IdxLabeller.__init__.html">
+       arviz.labels.IdxLabeller.__init__
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="arviz.labels.IdxLabeller.dim_coord_to_str.html">
+       arviz.labels.IdxLabeller.dim_coord_to_str
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="arviz.labels.IdxLabeller.make_label_flat.html">
+       arviz.labels.IdxLabeller.make_label_flat
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="arviz.labels.IdxLabeller.make_label_vert.html">
+       arviz.labels.IdxLabeller.make_label_vert
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="arviz.labels.IdxLabeller.make_model_label.html">
+       arviz.labels.IdxLabeller.make_model_label
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="arviz.labels.IdxLabeller.make_pp_label.html">
+       arviz.labels.IdxLabeller.make_pp_label
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="arviz.labels.IdxLabeller.model_name_to_str.html">
+       arviz.labels.IdxLabeller.model_name_to_str
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="arviz.labels.IdxLabeller.sel_to_str.html">
+       arviz.labels.IdxLabeller.sel_to_str
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="arviz.labels.IdxLabeller.var_name_to_str.html">
+       arviz.labels.IdxLabeller.var_name_to_str
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="arviz.labels.IdxLabeller.var_pp_to_str.html">
+       arviz.labels.IdxLabeller.var_pp_to_str
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="arviz.labels.DimIdxLabeller.html">
+     arviz.labels.DimIdxLabeller
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" type="checkbox"/>
+    <label for="toctree-checkbox-12">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="arviz.labels.DimIdxLabeller.__init__.html">
+       arviz.labels.DimIdxLabeller.__init__
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="arviz.labels.DimIdxLabeller.dim_coord_to_str.html">
+       arviz.labels.DimIdxLabeller.dim_coord_to_str
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="arviz.labels.DimIdxLabeller.make_label_flat.html">
+       arviz.labels.DimIdxLabeller.make_label_flat
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="arviz.labels.DimIdxLabeller.make_label_vert.html">
+       arviz.labels.DimIdxLabeller.make_label_vert
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="arviz.labels.DimIdxLabeller.make_model_label.html">
+       arviz.labels.DimIdxLabeller.make_model_label
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="arviz.labels.DimIdxLabeller.make_pp_label.html">
+       arviz.labels.DimIdxLabeller.make_pp_label
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="arviz.labels.DimIdxLabeller.model_name_to_str.html">
+       arviz.labels.DimIdxLabeller.model_name_to_str
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="arviz.labels.DimIdxLabeller.sel_to_str.html">
+       arviz.labels.DimIdxLabeller.sel_to_str
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="arviz.labels.DimIdxLabeller.var_name_to_str.html">
+       arviz.labels.DimIdxLabeller.var_name_to_str
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="arviz.labels.DimIdxLabeller.var_pp_to_str.html">
+       arviz.labels.DimIdxLabeller.var_pp_to_str
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="arviz.labels.MapLabeller.html">
+     arviz.labels.MapLabeller
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" type="checkbox"/>
+    <label for="toctree-checkbox-13">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="arviz.labels.MapLabeller.__init__.html">
+       arviz.labels.MapLabeller.__init__
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="arviz.labels.MapLabeller.dim_coord_to_str.html">
+       arviz.labels.MapLabeller.dim_coord_to_str
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="arviz.labels.MapLabeller.make_label_flat.html">
+       arviz.labels.MapLabeller.make_label_flat
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="arviz.labels.MapLabeller.make_label_vert.html">
+       arviz.labels.MapLabeller.make_label_vert
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="arviz.labels.MapLabeller.make_model_label.html">
+       arviz.labels.MapLabeller.make_model_label
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="arviz.labels.MapLabeller.make_pp_label.html">
+       arviz.labels.MapLabeller.make_pp_label
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="arviz.labels.MapLabeller.model_name_to_str.html">
+       arviz.labels.MapLabeller.model_name_to_str
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="arviz.labels.MapLabeller.sel_to_str.html">
+       arviz.labels.MapLabeller.sel_to_str
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="arviz.labels.MapLabeller.var_name_to_str.html">
+       arviz.labels.MapLabeller.var_name_to_str
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="arviz.labels.MapLabeller.var_pp_to_str.html">
+       arviz.labels.MapLabeller.var_pp_to_str
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="arviz.labels.NoModelLabeller.html">
+     arviz.labels.NoModelLabeller
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" type="checkbox"/>
+    <label for="toctree-checkbox-14">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="arviz.labels.NoModelLabeller.__init__.html">
+       arviz.labels.NoModelLabeller.__init__
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="arviz.labels.NoModelLabeller.dim_coord_to_str.html">
+       arviz.labels.NoModelLabeller.dim_coord_to_str
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="arviz.labels.NoModelLabeller.make_label_flat.html">
+       arviz.labels.NoModelLabeller.make_label_flat
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="arviz.labels.NoModelLabeller.make_label_vert.html">
+       arviz.labels.NoModelLabeller.make_label_vert
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="arviz.labels.NoModelLabeller.make_model_label.html">
+       arviz.labels.NoModelLabeller.make_model_label
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="arviz.labels.NoModelLabeller.make_pp_label.html">
+       arviz.labels.NoModelLabeller.make_pp_label
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="arviz.labels.NoModelLabeller.model_name_to_str.html">
+       arviz.labels.NoModelLabeller.model_name_to_str
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="arviz.labels.NoModelLabeller.sel_to_str.html">
+       arviz.labels.NoModelLabeller.sel_to_str
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="arviz.labels.NoModelLabeller.var_name_to_str.html">
+       arviz.labels.NoModelLabeller.var_name_to_str
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="arviz.labels.NoModelLabeller.var_pp_to_str.html">
+       arviz.labels.NoModelLabeller.var_pp_to_str
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="arviz.labels.NoVarLabeller.html">
+     arviz.labels.NoVarLabeller
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" type="checkbox"/>
+    <label for="toctree-checkbox-15">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="arviz.labels.NoVarLabeller.__init__.html">
+       arviz.labels.NoVarLabeller.__init__
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="arviz.labels.NoVarLabeller.dim_coord_to_str.html">
+       arviz.labels.NoVarLabeller.dim_coord_to_str
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="arviz.labels.NoVarLabeller.make_label_flat.html">
+       arviz.labels.NoVarLabeller.make_label_flat
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="arviz.labels.NoVarLabeller.make_label_vert.html">
+       arviz.labels.NoVarLabeller.make_label_vert
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="arviz.labels.NoVarLabeller.make_model_label.html">
+       arviz.labels.NoVarLabeller.make_model_label
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="arviz.labels.NoVarLabeller.make_pp_label.html">
+       arviz.labels.NoVarLabeller.make_pp_label
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="arviz.labels.NoVarLabeller.model_name_to_str.html">
+       arviz.labels.NoVarLabeller.model_name_to_str
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="arviz.labels.NoVarLabeller.sel_to_str.html">
+       arviz.labels.NoVarLabeller.sel_to_str
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="arviz.labels.NoVarLabeller.var_name_to_str.html">
+       arviz.labels.NoVarLabeller.var_name_to_str
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="arviz.labels.NoVarLabeller.var_pp_to_str.html">
+       arviz.labels.NoVarLabeller.var_pp_to_str
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="arviz.labels.mix_labellers.html">
+     arviz.labels.mix_labellers
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="arviz.sel_utils.xarray_sel_iter.html">
+     arviz.sel_utils.xarray_sel_iter
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="arviz.sel_utils.xarray_var_iter.html">
+     arviz.sel_utils.xarray_var_iter
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="arviz.sel_utils.xarray_to_ndarray.html">
+     arviz.sel_utils.xarray_to_ndarray
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../utils.html">
+   Utils
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-16" name="toctree-checkbox-16" type="checkbox"/>
+  <label for="toctree-checkbox-16">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="arviz.Numba.html">
+     arviz.Numba
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="arviz.Dask.html">
+     arviz.Dask
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="arviz.ColumnDataSource.html">
+     arviz.ColumnDataSource
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="arviz.create_layout.html">
+     arviz.create_layout
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="arviz.output_notebook.html">
+     arviz.output_notebook
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="arviz.output_file.html">
+     arviz.output_file
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="arviz.show_layout.html">
+     arviz.show_layout
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="arviz.to_cds.html">
+     arviz.to_cds
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="arviz.interactive_backend.html">
+     arviz.interactive_backend
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../rcparams.html">
+   rcParams
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-17" name="toctree-checkbox-17" type="checkbox"/>
+  <label for="toctree-checkbox-17">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="arviz.rc_context.html">
+     arviz.rc_context
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../wrappers.html">
+   Wrappers
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-18" name="toctree-checkbox-18" type="checkbox"/>
+  <label for="toctree-checkbox-18">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="arviz.SamplingWrapper.html">
+     arviz.SamplingWrapper
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-19" name="toctree-checkbox-19" type="checkbox"/>
+    <label for="toctree-checkbox-19">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="arviz.SamplingWrapper.__init__.html">
+       arviz.SamplingWrapper.__init__
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="arviz.SamplingWrapper.check_implemented_methods.html">
+       arviz.SamplingWrapper.check_implemented_methods
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="arviz.SamplingWrapper.get_inference_data.html">
+       arviz.SamplingWrapper.get_inference_data
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="arviz.SamplingWrapper.log_likelihood__i.html">
+       arviz.SamplingWrapper.log_likelihood__i
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="arviz.SamplingWrapper.sample.html">
+       arviz.SamplingWrapper.sample
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="arviz.SamplingWrapper.sel_observations.html">
+       arviz.SamplingWrapper.sel_observations
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="arviz.PyStanSamplingWrapper.html">
+     arviz.PyStanSamplingWrapper
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-20" name="toctree-checkbox-20" type="checkbox"/>
+    <label for="toctree-checkbox-20">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="arviz.PyStanSamplingWrapper.__init__.html">
+       arviz.PyStanSamplingWrapper.__init__
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="arviz.PyStanSamplingWrapper.check_implemented_methods.html">
+       arviz.PyStanSamplingWrapper.check_implemented_methods
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="arviz.PyStanSamplingWrapper.get_inference_data.html">
+       arviz.PyStanSamplingWrapper.get_inference_data
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="arviz.PyStanSamplingWrapper.log_likelihood__i.html">
+       arviz.PyStanSamplingWrapper.log_likelihood__i
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="arviz.PyStanSamplingWrapper.sample.html">
+       arviz.PyStanSamplingWrapper.sample
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="arviz.PyStanSamplingWrapper.sel_observations.html">
+       arviz.PyStanSamplingWrapper.sel_observations
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toctree-l2 has-children">
+    <a class="reference internal" href="arviz.PyStan2SamplingWrapper.html">
+     arviz.PyStan2SamplingWrapper
+    </a>
+    <input class="toctree-checkbox" id="toctree-checkbox-21" name="toctree-checkbox-21" type="checkbox"/>
+    <label for="toctree-checkbox-21">
+     <i class="fas fa-chevron-down">
+     </i>
+    </label>
+    <ul>
+     <li class="toctree-l3">
+      <a class="reference internal" href="arviz.PyStan2SamplingWrapper.__init__.html">
+       arviz.PyStan2SamplingWrapper.__init__
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="arviz.PyStan2SamplingWrapper.check_implemented_methods.html">
+       arviz.PyStan2SamplingWrapper.check_implemented_methods
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="arviz.PyStan2SamplingWrapper.get_inference_data.html">
+       arviz.PyStan2SamplingWrapper.get_inference_data
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="arviz.PyStan2SamplingWrapper.log_likelihood__i.html">
+       arviz.PyStan2SamplingWrapper.log_likelihood__i
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="arviz.PyStan2SamplingWrapper.sample.html">
+       arviz.PyStan2SamplingWrapper.sample
+      </a>
+     </li>
+     <li class="toctree-l3">
+      <a class="reference internal" href="arviz.PyStan2SamplingWrapper.sel_observations.html">
+       arviz.PyStan2SamplingWrapper.sel_observations
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../stats_refitting.html">
+   Stats (requiring refitting)
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-22" name="toctree-checkbox-22" type="checkbox"/>
+  <label for="toctree-checkbox-22">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="arviz.reloo.html">
+     arviz.reloo
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+  </div>
+</nav>
+  </div>
+  <div class="sidebar-end-items">
+  </div>
+</div>
+
+
+  
+
+          
+  
+    
+
+
+<div class="bd-sidebar-secondary d-none d-xl-block col-xl-2 bd-toc">
+  
+    
+    <div class="toc-item">
+      
+
+<nav id="bd-toc-nav">
+    
+</nav>
+    </div>
+    
+    <div class="toc-item">
+      
+    </div>
+    
+    <div class="toc-item">
+      
+<div class="tocsection editthispage">
+
+    <a href="https://numfocus.org/donate-to-arviz">
+      <i class="far fa-heart"></i> Support ArviZ
+    </a>
+</div>
+    </div>
+    
+  
+</div>
+
+  
+
+
+          
+  
+    
+          
+          <div class="bd-content col-12 col-md-9 col-xl-7">
+              
+              <article class="bd-article" role="main">
+                
+  <section id="arviz-extract">
+<h1>arviz.extract<a class="headerlink" href="#arviz-extract" title="Permalink to this headline">#</a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="arviz.extract">
+<span class="sig-prename descclassname"><span class="pre">arviz.</span></span><span class="sig-name descname"><span class="pre">extract</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">group</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'posterior'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">combined</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">var_names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filter_vars</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num_samples</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">keep_dataset</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rng</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/arviz/data/utils.html#extract"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#arviz.extract" title="Permalink to this definition">#</a></dt>
+<dd><p>Extract an InferenceData group or subset of it.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>idata</strong><span class="classifier">InferenceData or InferenceData_like</span></dt><dd><p>InferenceData from which to extract the data.</p>
+</dd>
+<dt><strong>group</strong><span class="classifier">str, optional</span></dt><dd><p>Which InferenceData data group to extract data from.</p>
+</dd>
+<dt><strong>combined</strong><span class="classifier">bool, optional</span></dt><dd><p>Combine <code class="docutils literal notranslate"><span class="pre">chain</span></code> and <code class="docutils literal notranslate"><span class="pre">draw</span></code> dimensions into <code class="docutils literal notranslate"><span class="pre">sample</span></code>. Won’t work if
+a dimension named <code class="docutils literal notranslate"><span class="pre">sample</span></code> already exists.</p>
+</dd>
+<dt><strong>var_names</strong><span class="classifier">str or list of str, optional</span></dt><dd><p>Variables to be extracted. Prefix the variables by <code class="code docutils literal notranslate"><span class="pre">~</span></code> when you want to exclude them.</p>
+</dd>
+<dt><strong>filter_vars: {None, “like”, “regex”}, optional</strong></dt><dd><p>If <code class="code docutils literal notranslate"><span class="pre">None</span></code> (default), interpret var_names as the real variables names. If “like”,
+interpret var_names as substrings of the real variables names. If “regex”,
+interpret var_names as regular expressions on the real variables names. A la
+<code class="code docutils literal notranslate"><span class="pre">pandas.filter</span></code>.
+Like with plotting, sometimes it’s easier to subset saying what to exclude
+instead of what to include</p>
+</dd>
+<dt><strong>num_samples</strong><span class="classifier">int, optional</span></dt><dd><p>Extract only a subset of the samples. Only valid if <code class="docutils literal notranslate"><span class="pre">combined=True</span></code></p>
+</dd>
+<dt><strong>keep_dataset</strong><span class="classifier">bool, optional</span></dt><dd><p>If true, always return a DataSet. If false (default) return a DataArray
+when there is a single variable.</p>
+</dd>
+<dt><strong>rng</strong><span class="classifier">bool, int, numpy.Generator, optional</span></dt><dd><p>Shuffle the samples, only valid if <code class="docutils literal notranslate"><span class="pre">combined=True</span></code>. By default,
+samples are shuffled if <code class="docutils literal notranslate"><span class="pre">num_samples</span></code> is not <code class="docutils literal notranslate"><span class="pre">None</span></code>, and are left
+in the same order otherwise. This ensures that subsetting the samples doesn’t return
+only samples from a single chain and consecutive draws.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><dl class="simple">
+<dt>xarray.DataArray or xarray.Dataset</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+<p class="rubric">Examples</p>
+<p>The default behaviour is to return the posterior group after stacking the chain and
+draw dimensions.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">arviz</span> <span class="k">as</span> <span class="nn">az</span>
+<span class="n">idata</span> <span class="o">=</span> <span class="n">az</span><span class="o">.</span><span class="n">load_arviz_data</span><span class="p">(</span><span class="s2">&quot;centered_eight&quot;</span><span class="p">)</span>
+<span class="n">az</span><span class="o">.</span><span class="n">extract</span><span class="p">(</span><span class="n">idata</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div><svg style="position: absolute; width: 0; height: 0; overflow: hidden">
+<defs>
+<symbol id="icon-database" viewBox="0 0 32 32">
+<path d="M16 0c-8.837 0-16 2.239-16 5v4c0 2.761 7.163 5 16 5s16-2.239 16-5v-4c0-2.761-7.163-5-16-5z"></path>
+<path d="M16 17c-8.837 0-16-2.239-16-5v6c0 2.761 7.163 5 16 5s16-2.239 16-5v-6c0 2.761-7.163 5-16 5z"></path>
+<path d="M16 26c-8.837 0-16-2.239-16-5v6c0 2.761 7.163 5 16 5s16-2.239 16-5v-6c0 2.761-7.163 5-16 5z"></path>
+</symbol>
+<symbol id="icon-file-text2" viewBox="0 0 32 32">
+<path d="M28.681 7.159c-0.694-0.947-1.662-2.053-2.724-3.116s-2.169-2.030-3.116-2.724c-1.612-1.182-2.393-1.319-2.841-1.319h-15.5c-1.378 0-2.5 1.121-2.5 2.5v27c0 1.378 1.122 2.5 2.5 2.5h23c1.378 0 2.5-1.122 2.5-2.5v-19.5c0-0.448-0.137-1.23-1.319-2.841zM24.543 5.457c0.959 0.959 1.712 1.825 2.268 2.543h-4.811v-4.811c0.718 0.556 1.584 1.309 2.543 2.268zM28 29.5c0 0.271-0.229 0.5-0.5 0.5h-23c-0.271 0-0.5-0.229-0.5-0.5v-27c0-0.271 0.229-0.5 0.5-0.5 0 0 15.499-0 15.5 0v7c0 0.552 0.448 1 1 1h7v19.5z"></path>
+<path d="M23 26h-14c-0.552 0-1-0.448-1-1s0.448-1 1-1h14c0.552 0 1 0.448 1 1s-0.448 1-1 1z"></path>
+<path d="M23 22h-14c-0.552 0-1-0.448-1-1s0.448-1 1-1h14c0.552 0 1 0.448 1 1s-0.448 1-1 1z"></path>
+<path d="M23 18h-14c-0.552 0-1-0.448-1-1s0.448-1 1-1h14c0.552 0 1 0.448 1 1s-0.448 1-1 1z"></path>
+</symbol>
+</defs>
+</svg>
+<style>/* CSS stylesheet for displaying xarray objects in jupyterlab.
+ *
+ */
+
+:root {
+  --xr-font-color0: var(--jp-content-font-color0, rgba(0, 0, 0, 1));
+  --xr-font-color2: var(--jp-content-font-color2, rgba(0, 0, 0, 0.54));
+  --xr-font-color3: var(--jp-content-font-color3, rgba(0, 0, 0, 0.38));
+  --xr-border-color: var(--jp-border-color2, #e0e0e0);
+  --xr-disabled-color: var(--jp-layout-color3, #bdbdbd);
+  --xr-background-color: var(--jp-layout-color0, white);
+  --xr-background-color-row-even: var(--jp-layout-color1, white);
+  --xr-background-color-row-odd: var(--jp-layout-color2, #eeeeee);
+}
+
+html[theme=dark],
+body[data-theme=dark],
+body.vscode-dark {
+  --xr-font-color0: rgba(255, 255, 255, 1);
+  --xr-font-color2: rgba(255, 255, 255, 0.54);
+  --xr-font-color3: rgba(255, 255, 255, 0.38);
+  --xr-border-color: #1F1F1F;
+  --xr-disabled-color: #515151;
+  --xr-background-color: #111111;
+  --xr-background-color-row-even: #111111;
+  --xr-background-color-row-odd: #313131;
+}
+
+.xr-wrap {
+  display: block !important;
+  min-width: 300px;
+  max-width: 700px;
+}
+
+.xr-text-repr-fallback {
+  /* fallback to plain text repr when CSS is not injected (untrusted notebook) */
+  display: none;
+}
+
+.xr-header {
+  padding-top: 6px;
+  padding-bottom: 6px;
+  margin-bottom: 4px;
+  border-bottom: solid 1px var(--xr-border-color);
+}
+
+.xr-header > div,
+.xr-header > ul {
+  display: inline;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.xr-obj-type,
+.xr-array-name {
+  margin-left: 2px;
+  margin-right: 10px;
+}
+
+.xr-obj-type {
+  color: var(--xr-font-color2);
+}
+
+.xr-sections {
+  padding-left: 0 !important;
+  display: grid;
+  grid-template-columns: 150px auto auto 1fr 20px 20px;
+}
+
+.xr-section-item {
+  display: contents;
+}
+
+.xr-section-item input {
+  display: none;
+}
+
+.xr-section-item input + label {
+  color: var(--xr-disabled-color);
+}
+
+.xr-section-item input:enabled + label {
+  cursor: pointer;
+  color: var(--xr-font-color2);
+}
+
+.xr-section-item input:enabled + label:hover {
+  color: var(--xr-font-color0);
+}
+
+.xr-section-summary {
+  grid-column: 1;
+  color: var(--xr-font-color2);
+  font-weight: 500;
+}
+
+.xr-section-summary > span {
+  display: inline-block;
+  padding-left: 0.5em;
+}
+
+.xr-section-summary-in:disabled + label {
+  color: var(--xr-font-color2);
+}
+
+.xr-section-summary-in + label:before {
+  display: inline-block;
+  content: '►';
+  font-size: 11px;
+  width: 15px;
+  text-align: center;
+}
+
+.xr-section-summary-in:disabled + label:before {
+  color: var(--xr-disabled-color);
+}
+
+.xr-section-summary-in:checked + label:before {
+  content: '▼';
+}
+
+.xr-section-summary-in:checked + label > span {
+  display: none;
+}
+
+.xr-section-summary,
+.xr-section-inline-details {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+.xr-section-inline-details {
+  grid-column: 2 / -1;
+}
+
+.xr-section-details {
+  display: none;
+  grid-column: 1 / -1;
+  margin-bottom: 5px;
+}
+
+.xr-section-summary-in:checked ~ .xr-section-details {
+  display: contents;
+}
+
+.xr-array-wrap {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 20px auto;
+}
+
+.xr-array-wrap > label {
+  grid-column: 1;
+  vertical-align: top;
+}
+
+.xr-preview {
+  color: var(--xr-font-color3);
+}
+
+.xr-array-preview,
+.xr-array-data {
+  padding: 0 5px !important;
+  grid-column: 2;
+}
+
+.xr-array-data,
+.xr-array-in:checked ~ .xr-array-preview {
+  display: none;
+}
+
+.xr-array-in:checked ~ .xr-array-data,
+.xr-array-preview {
+  display: inline-block;
+}
+
+.xr-dim-list {
+  display: inline-block !important;
+  list-style: none;
+  padding: 0 !important;
+  margin: 0;
+}
+
+.xr-dim-list li {
+  display: inline-block;
+  padding: 0;
+  margin: 0;
+}
+
+.xr-dim-list:before {
+  content: '(';
+}
+
+.xr-dim-list:after {
+  content: ')';
+}
+
+.xr-dim-list li:not(:last-child):after {
+  content: ',';
+  padding-right: 5px;
+}
+
+.xr-has-index {
+  font-weight: bold;
+}
+
+.xr-var-list,
+.xr-var-item {
+  display: contents;
+}
+
+.xr-var-item > div,
+.xr-var-item label,
+.xr-var-item > .xr-var-name span {
+  background-color: var(--xr-background-color-row-even);
+  margin-bottom: 0;
+}
+
+.xr-var-item > .xr-var-name:hover span {
+  padding-right: 5px;
+}
+
+.xr-var-list > li:nth-child(odd) > div,
+.xr-var-list > li:nth-child(odd) > label,
+.xr-var-list > li:nth-child(odd) > .xr-var-name span {
+  background-color: var(--xr-background-color-row-odd);
+}
+
+.xr-var-name {
+  grid-column: 1;
+}
+
+.xr-var-dims {
+  grid-column: 2;
+}
+
+.xr-var-dtype {
+  grid-column: 3;
+  text-align: right;
+  color: var(--xr-font-color2);
+}
+
+.xr-var-preview {
+  grid-column: 4;
+}
+
+.xr-var-name,
+.xr-var-dims,
+.xr-var-dtype,
+.xr-preview,
+.xr-attrs dt {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-right: 10px;
+}
+
+.xr-var-name:hover,
+.xr-var-dims:hover,
+.xr-var-dtype:hover,
+.xr-attrs dt:hover {
+  overflow: visible;
+  width: auto;
+  z-index: 1;
+}
+
+.xr-var-attrs,
+.xr-var-data {
+  display: none;
+  background-color: var(--xr-background-color) !important;
+  padding-bottom: 5px !important;
+}
+
+.xr-var-attrs-in:checked ~ .xr-var-attrs,
+.xr-var-data-in:checked ~ .xr-var-data {
+  display: block;
+}
+
+.xr-var-data > table {
+  float: right;
+}
+
+.xr-var-name span,
+.xr-var-data,
+.xr-attrs {
+  padding-left: 25px !important;
+}
+
+.xr-attrs,
+.xr-var-attrs,
+.xr-var-data {
+  grid-column: 1 / -1;
+}
+
+dl.xr-attrs {
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: 125px auto;
+}
+
+.xr-attrs dt,
+.xr-attrs dd {
+  padding: 0;
+  margin: 0;
+  float: left;
+  padding-right: 10px;
+  width: auto;
+}
+
+.xr-attrs dt {
+  font-weight: normal;
+  grid-column: 1;
+}
+
+.xr-attrs dt:hover span {
+  display: inline-block;
+  background: var(--xr-background-color);
+  padding-right: 10px;
+}
+
+.xr-attrs dd {
+  grid-column: 2;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+.xr-icon-database,
+.xr-icon-file-text2 {
+  display: inline-block;
+  vertical-align: middle;
+  width: 1em;
+  height: 1.5em !important;
+  stroke-width: 0;
+  stroke: currentColor;
+  fill: currentColor;
+}
+</style><pre class='xr-text-repr-fallback'>&lt;xarray.Dataset&gt;
+Dimensions:  (school: 8, sample: 2000)
+Coordinates:
+  * school   (school) object &#x27;Choate&#x27; &#x27;Deerfield&#x27; ... &quot;St. Paul&#x27;s&quot; &#x27;Mt. Hermon&#x27;
+  * sample   (sample) object MultiIndex
+  * chain    (sample) int64 0 0 0 0 0 0 0 0 0 0 0 0 ... 3 3 3 3 3 3 3 3 3 3 3 3
+  * draw     (sample) int64 0 1 2 3 4 5 6 7 ... 492 493 494 495 496 497 498 499
+Data variables:
+    mu       (sample) float64 -3.477 -2.456 -2.826 -1.996 ... 4.597 5.899 0.1614
+    theta    (school, sample) float64 1.669 -6.239 2.195 ... -1.095 4.013 4.523
+    tau      (sample) float64 3.73 2.075 3.703 4.146 ... 8.589 8.346 7.711 5.407
+Attributes:
+    created_at:                 2019-06-21T17:36:34.398087
+    inference_library:          pymc3
+    inference_library_version:  3.7</pre><div class='xr-wrap' style='display:none'><div class='xr-header'><div class='xr-obj-type'>xarray.Dataset</div></div><ul class='xr-sections'><li class='xr-section-item'><input id='section-9dcfd442-39cf-45a1-81ce-720dcef60224' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-9dcfd442-39cf-45a1-81ce-720dcef60224' class='xr-section-summary'  title='Expand/collapse section'>Dimensions:</label><div class='xr-section-inline-details'><ul class='xr-dim-list'><li><span class='xr-has-index'>school</span>: 8</li><li><span class='xr-has-index'>sample</span>: 2000</li></ul></div><div class='xr-section-details'></div></li><li class='xr-section-item'><input id='section-54ec5fc6-0d9e-409c-ab02-d11c7cb115c2' class='xr-section-summary-in' type='checkbox'  checked><label for='section-54ec5fc6-0d9e-409c-ab02-d11c7cb115c2' class='xr-section-summary' >Coordinates: <span>(4)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>school</span></div><div class='xr-var-dims'>(school)</div><div class='xr-var-dtype'>object</div><div class='xr-var-preview xr-preview'>&#x27;Choate&#x27; ... &#x27;Mt. Hermon&#x27;</div><input id='attrs-7c1ff749-7639-4e07-a4d4-6046d78969a7' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-7c1ff749-7639-4e07-a4d4-6046d78969a7' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-dc52c36a-38c3-429a-aaee-94432c927095' class='xr-var-data-in' type='checkbox'><label for='data-dc52c36a-38c3-429a-aaee-94432c927095' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([&#x27;Choate&#x27;, &#x27;Deerfield&#x27;, &#x27;Phillips Andover&#x27;, &#x27;Phillips Exeter&#x27;,
+       &#x27;Hotchkiss&#x27;, &#x27;Lawrenceville&#x27;, &quot;St. Paul&#x27;s&quot;, &#x27;Mt. Hermon&#x27;], dtype=object)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>sample</span></div><div class='xr-var-dims'>(sample)</div><div class='xr-var-dtype'>object</div><div class='xr-var-preview xr-preview'>MultiIndex</div><input id='attrs-1c6ba33d-38ac-4d96-b85d-b33f90c8f085' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-1c6ba33d-38ac-4d96-b85d-b33f90c8f085' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-31e14abf-2f07-46c8-a258-8f4794de93df' class='xr-var-data-in' type='checkbox'><label for='data-31e14abf-2f07-46c8-a258-8f4794de93df' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([(0, 0), (0, 1), (0, 2), ..., (3, 497), (3, 498), (3, 499)], dtype=object)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>chain</span></div><div class='xr-var-dims'>(sample)</div><div class='xr-var-dtype'>int64</div><div class='xr-var-preview xr-preview'>0 0 0 0 0 0 0 0 ... 3 3 3 3 3 3 3 3</div><input id='attrs-a25e9faa-af11-4121-8b17-eb984ef71627' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-a25e9faa-af11-4121-8b17-eb984ef71627' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-523d9ab7-1232-48a8-b3ee-ca743d96549f' class='xr-var-data-in' type='checkbox'><label for='data-523d9ab7-1232-48a8-b3ee-ca743d96549f' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([0, 0, 0, ..., 3, 3, 3])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>draw</span></div><div class='xr-var-dims'>(sample)</div><div class='xr-var-dtype'>int64</div><div class='xr-var-preview xr-preview'>0 1 2 3 4 5 ... 495 496 497 498 499</div><input id='attrs-78d4d0a6-3df4-46d0-bfee-6e444d44faa8' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-78d4d0a6-3df4-46d0-bfee-6e444d44faa8' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-9fe91b2c-2740-40be-8b62-fe4dda66e2ce' class='xr-var-data-in' type='checkbox'><label for='data-9fe91b2c-2740-40be-8b62-fe4dda66e2ce' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([  0,   1,   2, ..., 497, 498, 499])</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-ff70205e-e673-4f7a-849b-dcaab345ba05' class='xr-section-summary-in' type='checkbox'  checked><label for='section-ff70205e-e673-4f7a-849b-dcaab345ba05' class='xr-section-summary' >Data variables: <span>(3)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>mu</span></div><div class='xr-var-dims'>(sample)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>-3.477 -2.456 ... 5.899 0.1614</div><input id='attrs-0498cb99-4b74-41d0-90be-12ee9f1964cc' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-0498cb99-4b74-41d0-90be-12ee9f1964cc' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-07f8d8de-5793-42ff-96de-f3120803ee78' class='xr-var-data-in' type='checkbox'><label for='data-07f8d8de-5793-42ff-96de-f3120803ee78' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([-3.47698606, -2.45587061, -2.82625433, ...,  4.59705819,
+        5.89850592,  0.16138927])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>theta</span></div><div class='xr-var-dims'>(school, sample)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>1.669 -6.239 2.195 ... 4.013 4.523</div><input id='attrs-85edbb32-3fec-40c0-9df7-c7c01588633b' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-85edbb32-3fec-40c0-9df7-c7c01588633b' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-f7300c0c-c0d1-493d-b5b1-1660ea2129c8' class='xr-var-data-in' type='checkbox'><label for='data-f7300c0c-c0d1-493d-b5b1-1660ea2129c8' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([[ 1.66865435, -6.23935854,  2.19509753, ..., 14.18629932,
+        -1.42094639, -0.05015941],
+       [-8.53740136,  1.0714115 , -2.9208433 , ..., 11.76271563,
+        -4.0344055 ,  0.06353824],
+       [-2.622619  , -4.51792731, -3.49420117, ...,  4.68403648,
+        16.62006419,  7.60845423],
+       ...,
+       [-9.17401935,  0.39954568, -2.72030236, ...,  3.35749116,
+        -4.90192473, -1.10614164],
+       [ 0.15523406, -4.46252755, -3.4870049 , ..., -0.58651408,
+        15.85064806, 10.59293283],
+       [-6.81825139, -1.11076126, -1.02643024, ..., -1.09507072,
+         4.01339719,  4.52338885]])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>tau</span></div><div class='xr-var-dims'>(sample)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>3.73 2.075 3.703 ... 7.711 5.407</div><input id='attrs-e5946c38-acb6-4f6b-817d-f3313a22f1b4' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-e5946c38-acb6-4f6b-817d-f3313a22f1b4' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-6fbb8be2-93cf-479d-82be-1398f817a42f' class='xr-var-data-in' type='checkbox'><label for='data-6fbb8be2-93cf-479d-82be-1398f817a42f' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([3.7301011 , 2.07538342, 3.70299344, ..., 8.34563098, 7.71079012,
+       5.40679834])</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-e7e4ee03-d5b2-468d-8f32-8d6b7b948176' class='xr-section-summary-in' type='checkbox'  checked><label for='section-e7e4ee03-d5b2-468d-8f32-8d6b7b948176' class='xr-section-summary' >Attributes: <span>(3)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'><dt><span>created_at :</span></dt><dd>2019-06-21T17:36:34.398087</dd><dt><span>inference_library :</span></dt><dd>pymc3</dd><dt><span>inference_library_version :</span></dt><dd>3.7</dd></dl></div></li></ul></div></div></div></div>
+</div>
+<p>You can also indicate a subset to be returned, but in variables and in samples:</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">az</span><span class="o">.</span><span class="n">extract</span><span class="p">(</span><span class="n">idata</span><span class="p">,</span> <span class="n">var_names</span><span class="o">=</span><span class="s2">&quot;theta&quot;</span><span class="p">,</span> <span class="n">num_samples</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div><svg style="position: absolute; width: 0; height: 0; overflow: hidden">
+<defs>
+<symbol id="icon-database" viewBox="0 0 32 32">
+<path d="M16 0c-8.837 0-16 2.239-16 5v4c0 2.761 7.163 5 16 5s16-2.239 16-5v-4c0-2.761-7.163-5-16-5z"></path>
+<path d="M16 17c-8.837 0-16-2.239-16-5v6c0 2.761 7.163 5 16 5s16-2.239 16-5v-6c0 2.761-7.163 5-16 5z"></path>
+<path d="M16 26c-8.837 0-16-2.239-16-5v6c0 2.761 7.163 5 16 5s16-2.239 16-5v-6c0 2.761-7.163 5-16 5z"></path>
+</symbol>
+<symbol id="icon-file-text2" viewBox="0 0 32 32">
+<path d="M28.681 7.159c-0.694-0.947-1.662-2.053-2.724-3.116s-2.169-2.030-3.116-2.724c-1.612-1.182-2.393-1.319-2.841-1.319h-15.5c-1.378 0-2.5 1.121-2.5 2.5v27c0 1.378 1.122 2.5 2.5 2.5h23c1.378 0 2.5-1.122 2.5-2.5v-19.5c0-0.448-0.137-1.23-1.319-2.841zM24.543 5.457c0.959 0.959 1.712 1.825 2.268 2.543h-4.811v-4.811c0.718 0.556 1.584 1.309 2.543 2.268zM28 29.5c0 0.271-0.229 0.5-0.5 0.5h-23c-0.271 0-0.5-0.229-0.5-0.5v-27c0-0.271 0.229-0.5 0.5-0.5 0 0 15.499-0 15.5 0v7c0 0.552 0.448 1 1 1h7v19.5z"></path>
+<path d="M23 26h-14c-0.552 0-1-0.448-1-1s0.448-1 1-1h14c0.552 0 1 0.448 1 1s-0.448 1-1 1z"></path>
+<path d="M23 22h-14c-0.552 0-1-0.448-1-1s0.448-1 1-1h14c0.552 0 1 0.448 1 1s-0.448 1-1 1z"></path>
+<path d="M23 18h-14c-0.552 0-1-0.448-1-1s0.448-1 1-1h14c0.552 0 1 0.448 1 1s-0.448 1-1 1z"></path>
+</symbol>
+</defs>
+</svg>
+<style>/* CSS stylesheet for displaying xarray objects in jupyterlab.
+ *
+ */
+
+:root {
+  --xr-font-color0: var(--jp-content-font-color0, rgba(0, 0, 0, 1));
+  --xr-font-color2: var(--jp-content-font-color2, rgba(0, 0, 0, 0.54));
+  --xr-font-color3: var(--jp-content-font-color3, rgba(0, 0, 0, 0.38));
+  --xr-border-color: var(--jp-border-color2, #e0e0e0);
+  --xr-disabled-color: var(--jp-layout-color3, #bdbdbd);
+  --xr-background-color: var(--jp-layout-color0, white);
+  --xr-background-color-row-even: var(--jp-layout-color1, white);
+  --xr-background-color-row-odd: var(--jp-layout-color2, #eeeeee);
+}
+
+html[theme=dark],
+body[data-theme=dark],
+body.vscode-dark {
+  --xr-font-color0: rgba(255, 255, 255, 1);
+  --xr-font-color2: rgba(255, 255, 255, 0.54);
+  --xr-font-color3: rgba(255, 255, 255, 0.38);
+  --xr-border-color: #1F1F1F;
+  --xr-disabled-color: #515151;
+  --xr-background-color: #111111;
+  --xr-background-color-row-even: #111111;
+  --xr-background-color-row-odd: #313131;
+}
+
+.xr-wrap {
+  display: block !important;
+  min-width: 300px;
+  max-width: 700px;
+}
+
+.xr-text-repr-fallback {
+  /* fallback to plain text repr when CSS is not injected (untrusted notebook) */
+  display: none;
+}
+
+.xr-header {
+  padding-top: 6px;
+  padding-bottom: 6px;
+  margin-bottom: 4px;
+  border-bottom: solid 1px var(--xr-border-color);
+}
+
+.xr-header > div,
+.xr-header > ul {
+  display: inline;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.xr-obj-type,
+.xr-array-name {
+  margin-left: 2px;
+  margin-right: 10px;
+}
+
+.xr-obj-type {
+  color: var(--xr-font-color2);
+}
+
+.xr-sections {
+  padding-left: 0 !important;
+  display: grid;
+  grid-template-columns: 150px auto auto 1fr 20px 20px;
+}
+
+.xr-section-item {
+  display: contents;
+}
+
+.xr-section-item input {
+  display: none;
+}
+
+.xr-section-item input + label {
+  color: var(--xr-disabled-color);
+}
+
+.xr-section-item input:enabled + label {
+  cursor: pointer;
+  color: var(--xr-font-color2);
+}
+
+.xr-section-item input:enabled + label:hover {
+  color: var(--xr-font-color0);
+}
+
+.xr-section-summary {
+  grid-column: 1;
+  color: var(--xr-font-color2);
+  font-weight: 500;
+}
+
+.xr-section-summary > span {
+  display: inline-block;
+  padding-left: 0.5em;
+}
+
+.xr-section-summary-in:disabled + label {
+  color: var(--xr-font-color2);
+}
+
+.xr-section-summary-in + label:before {
+  display: inline-block;
+  content: '►';
+  font-size: 11px;
+  width: 15px;
+  text-align: center;
+}
+
+.xr-section-summary-in:disabled + label:before {
+  color: var(--xr-disabled-color);
+}
+
+.xr-section-summary-in:checked + label:before {
+  content: '▼';
+}
+
+.xr-section-summary-in:checked + label > span {
+  display: none;
+}
+
+.xr-section-summary,
+.xr-section-inline-details {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+.xr-section-inline-details {
+  grid-column: 2 / -1;
+}
+
+.xr-section-details {
+  display: none;
+  grid-column: 1 / -1;
+  margin-bottom: 5px;
+}
+
+.xr-section-summary-in:checked ~ .xr-section-details {
+  display: contents;
+}
+
+.xr-array-wrap {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 20px auto;
+}
+
+.xr-array-wrap > label {
+  grid-column: 1;
+  vertical-align: top;
+}
+
+.xr-preview {
+  color: var(--xr-font-color3);
+}
+
+.xr-array-preview,
+.xr-array-data {
+  padding: 0 5px !important;
+  grid-column: 2;
+}
+
+.xr-array-data,
+.xr-array-in:checked ~ .xr-array-preview {
+  display: none;
+}
+
+.xr-array-in:checked ~ .xr-array-data,
+.xr-array-preview {
+  display: inline-block;
+}
+
+.xr-dim-list {
+  display: inline-block !important;
+  list-style: none;
+  padding: 0 !important;
+  margin: 0;
+}
+
+.xr-dim-list li {
+  display: inline-block;
+  padding: 0;
+  margin: 0;
+}
+
+.xr-dim-list:before {
+  content: '(';
+}
+
+.xr-dim-list:after {
+  content: ')';
+}
+
+.xr-dim-list li:not(:last-child):after {
+  content: ',';
+  padding-right: 5px;
+}
+
+.xr-has-index {
+  font-weight: bold;
+}
+
+.xr-var-list,
+.xr-var-item {
+  display: contents;
+}
+
+.xr-var-item > div,
+.xr-var-item label,
+.xr-var-item > .xr-var-name span {
+  background-color: var(--xr-background-color-row-even);
+  margin-bottom: 0;
+}
+
+.xr-var-item > .xr-var-name:hover span {
+  padding-right: 5px;
+}
+
+.xr-var-list > li:nth-child(odd) > div,
+.xr-var-list > li:nth-child(odd) > label,
+.xr-var-list > li:nth-child(odd) > .xr-var-name span {
+  background-color: var(--xr-background-color-row-odd);
+}
+
+.xr-var-name {
+  grid-column: 1;
+}
+
+.xr-var-dims {
+  grid-column: 2;
+}
+
+.xr-var-dtype {
+  grid-column: 3;
+  text-align: right;
+  color: var(--xr-font-color2);
+}
+
+.xr-var-preview {
+  grid-column: 4;
+}
+
+.xr-var-name,
+.xr-var-dims,
+.xr-var-dtype,
+.xr-preview,
+.xr-attrs dt {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-right: 10px;
+}
+
+.xr-var-name:hover,
+.xr-var-dims:hover,
+.xr-var-dtype:hover,
+.xr-attrs dt:hover {
+  overflow: visible;
+  width: auto;
+  z-index: 1;
+}
+
+.xr-var-attrs,
+.xr-var-data {
+  display: none;
+  background-color: var(--xr-background-color) !important;
+  padding-bottom: 5px !important;
+}
+
+.xr-var-attrs-in:checked ~ .xr-var-attrs,
+.xr-var-data-in:checked ~ .xr-var-data {
+  display: block;
+}
+
+.xr-var-data > table {
+  float: right;
+}
+
+.xr-var-name span,
+.xr-var-data,
+.xr-attrs {
+  padding-left: 25px !important;
+}
+
+.xr-attrs,
+.xr-var-attrs,
+.xr-var-data {
+  grid-column: 1 / -1;
+}
+
+dl.xr-attrs {
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: 125px auto;
+}
+
+.xr-attrs dt,
+.xr-attrs dd {
+  padding: 0;
+  margin: 0;
+  float: left;
+  padding-right: 10px;
+  width: auto;
+}
+
+.xr-attrs dt {
+  font-weight: normal;
+  grid-column: 1;
+}
+
+.xr-attrs dt:hover span {
+  display: inline-block;
+  background: var(--xr-background-color);
+  padding-right: 10px;
+}
+
+.xr-attrs dd {
+  grid-column: 2;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+.xr-icon-database,
+.xr-icon-file-text2 {
+  display: inline-block;
+  vertical-align: middle;
+  width: 1em;
+  height: 1.5em !important;
+  stroke-width: 0;
+  stroke: currentColor;
+  fill: currentColor;
+}
+</style><pre class='xr-text-repr-fallback'>&lt;xarray.DataArray &#x27;theta&#x27; (school: 8, sample: 100)&gt;
+array([[ 6.51847967e+00,  1.01242174e+01,  8.42366250e+00,
+         8.43398655e+00,  1.66634251e+01,  1.48255431e+01,
+         1.06326383e+01,  4.05630181e+00,  1.64346817e+01,
+         4.98618413e+00,  1.22481857e+01,  1.47978738e+01,
+         9.83562597e+00, -5.87679594e-02,  8.63587798e+00,
+         1.29450497e+01, -5.87679594e-02,  3.32160321e+00,
+         1.00405557e+01,  2.45070140e+00,  2.34172923e+01,
+         2.57036145e+00,  2.12583964e+00, -8.25196592e-01,
+         2.90405743e+00,  9.48062694e+00,  7.46625145e+00,
+        -3.55632474e-01,  6.16663986e+00,  1.26701574e+01,
+         1.57530105e+01,  1.16078842e+01, -8.84387048e+00,
+         5.25931025e+00,  1.91098345e+00,  1.14565339e+01,
+         1.85844801e+01,  9.44014723e+00,  1.03707204e+01,
+        -1.67325559e-01,  2.72083349e+00,  1.12277184e+01,
+         7.17195607e+00, -1.92393695e+00,  4.02159698e+00,
+        -1.55548927e+00,  1.23445313e+01,  1.39298904e+00,
+         5.91570644e+00,  4.72369587e+00,  1.96015320e+01,
+         5.60073302e-01,  2.94906571e-02,  8.52594406e-01,
+         1.18456676e+01,  9.71816304e+00,  1.64054182e+01,
+         1.09322051e+01,  3.23480638e+00,  3.80155078e+00,
+...
+         8.72554357e+00,  2.90837489e+00,  6.34903073e+00,
+        -6.85952268e+00,  1.35422312e+00, -1.49910612e+00,
+         6.43522071e+00,  6.46973956e+00,  1.87173882e+01,
+         7.74233197e-02,  3.04025342e+00,  2.62392712e+00,
+         1.36679950e+01,  1.18372603e+01,  8.65537886e+00,
+         9.20241328e+00,  7.30000897e+00,  3.69778027e+00,
+         2.87415699e+00,  1.40652304e+01, -7.34438243e+00,
+         7.46881494e+00,  4.38701037e+00,  9.03214574e+00,
+         8.28371358e+00,  3.17016285e+00, -4.48112554e+00,
+         8.91578289e+00,  4.56057592e+00,  9.75479991e+00,
+         5.46111858e+00,  3.24567320e+00,  2.06219565e+00,
+         3.47599221e+00, -1.06599222e+00,  8.17641208e+00,
+        -2.72480112e+00,  1.35112632e-01,  4.80923694e-01,
+         2.68207017e+00,  1.07276491e+00,  5.81495921e+00,
+         8.87030048e+00,  4.71721959e+00,  2.67407773e+00,
+         2.87512617e+00,  4.80283401e-01, -1.58673174e-01,
+         3.97406334e+00,  2.07425598e+00,  3.86996099e+00,
+         1.32537151e+01,  8.04401488e+00,  2.36064695e+00,
+        -4.81230781e+00,  5.57326846e+00, -3.48641509e+00,
+         4.90834616e+00]])
+Coordinates:
+  * school   (school) object &#x27;Choate&#x27; &#x27;Deerfield&#x27; ... &quot;St. Paul&#x27;s&quot; &#x27;Mt. Hermon&#x27;
+  * sample   (sample) object MultiIndex
+  * chain    (sample) int64 0 1 0 0 2 3 1 3 2 3 2 0 ... 2 2 2 3 1 1 2 3 2 0 0 3
+  * draw     (sample) int64 81 279 180 245 109 439 ... 437 441 404 438 35 118</pre><div class='xr-wrap' style='display:none'><div class='xr-header'><div class='xr-obj-type'>xarray.DataArray</div><div class='xr-array-name'>'theta'</div><ul class='xr-dim-list'><li><span class='xr-has-index'>school</span>: 8</li><li><span class='xr-has-index'>sample</span>: 100</li></ul></div><ul class='xr-sections'><li class='xr-section-item'><div class='xr-array-wrap'><input id='section-dd172265-bc9c-41df-a283-f28d5cb6fdff' class='xr-array-in' type='checkbox' checked><label for='section-dd172265-bc9c-41df-a283-f28d5cb6fdff' title='Show/hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-array-preview xr-preview'><span>6.518 10.12 8.424 8.434 16.66 ... 2.361 -4.812 5.573 -3.486 4.908</span></div><div class='xr-array-data'><pre>array([[ 6.51847967e+00,  1.01242174e+01,  8.42366250e+00,
+         8.43398655e+00,  1.66634251e+01,  1.48255431e+01,
+         1.06326383e+01,  4.05630181e+00,  1.64346817e+01,
+         4.98618413e+00,  1.22481857e+01,  1.47978738e+01,
+         9.83562597e+00, -5.87679594e-02,  8.63587798e+00,
+         1.29450497e+01, -5.87679594e-02,  3.32160321e+00,
+         1.00405557e+01,  2.45070140e+00,  2.34172923e+01,
+         2.57036145e+00,  2.12583964e+00, -8.25196592e-01,
+         2.90405743e+00,  9.48062694e+00,  7.46625145e+00,
+        -3.55632474e-01,  6.16663986e+00,  1.26701574e+01,
+         1.57530105e+01,  1.16078842e+01, -8.84387048e+00,
+         5.25931025e+00,  1.91098345e+00,  1.14565339e+01,
+         1.85844801e+01,  9.44014723e+00,  1.03707204e+01,
+        -1.67325559e-01,  2.72083349e+00,  1.12277184e+01,
+         7.17195607e+00, -1.92393695e+00,  4.02159698e+00,
+        -1.55548927e+00,  1.23445313e+01,  1.39298904e+00,
+         5.91570644e+00,  4.72369587e+00,  1.96015320e+01,
+         5.60073302e-01,  2.94906571e-02,  8.52594406e-01,
+         1.18456676e+01,  9.71816304e+00,  1.64054182e+01,
+         1.09322051e+01,  3.23480638e+00,  3.80155078e+00,
+...
+         8.72554357e+00,  2.90837489e+00,  6.34903073e+00,
+        -6.85952268e+00,  1.35422312e+00, -1.49910612e+00,
+         6.43522071e+00,  6.46973956e+00,  1.87173882e+01,
+         7.74233197e-02,  3.04025342e+00,  2.62392712e+00,
+         1.36679950e+01,  1.18372603e+01,  8.65537886e+00,
+         9.20241328e+00,  7.30000897e+00,  3.69778027e+00,
+         2.87415699e+00,  1.40652304e+01, -7.34438243e+00,
+         7.46881494e+00,  4.38701037e+00,  9.03214574e+00,
+         8.28371358e+00,  3.17016285e+00, -4.48112554e+00,
+         8.91578289e+00,  4.56057592e+00,  9.75479991e+00,
+         5.46111858e+00,  3.24567320e+00,  2.06219565e+00,
+         3.47599221e+00, -1.06599222e+00,  8.17641208e+00,
+        -2.72480112e+00,  1.35112632e-01,  4.80923694e-01,
+         2.68207017e+00,  1.07276491e+00,  5.81495921e+00,
+         8.87030048e+00,  4.71721959e+00,  2.67407773e+00,
+         2.87512617e+00,  4.80283401e-01, -1.58673174e-01,
+         3.97406334e+00,  2.07425598e+00,  3.86996099e+00,
+         1.32537151e+01,  8.04401488e+00,  2.36064695e+00,
+        -4.81230781e+00,  5.57326846e+00, -3.48641509e+00,
+         4.90834616e+00]])</pre></div></div></li><li class='xr-section-item'><input id='section-308a54fe-bca0-42db-b172-f0b4d724f16f' class='xr-section-summary-in' type='checkbox'  checked><label for='section-308a54fe-bca0-42db-b172-f0b4d724f16f' class='xr-section-summary' >Coordinates: <span>(4)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>school</span></div><div class='xr-var-dims'>(school)</div><div class='xr-var-dtype'>object</div><div class='xr-var-preview xr-preview'>&#x27;Choate&#x27; ... &#x27;Mt. Hermon&#x27;</div><input id='attrs-6015e593-60f8-44eb-a82d-805c0031ce24' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-6015e593-60f8-44eb-a82d-805c0031ce24' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-c05bdbb6-2174-40e4-9c64-762f0bdb207f' class='xr-var-data-in' type='checkbox'><label for='data-c05bdbb6-2174-40e4-9c64-762f0bdb207f' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([&#x27;Choate&#x27;, &#x27;Deerfield&#x27;, &#x27;Phillips Andover&#x27;, &#x27;Phillips Exeter&#x27;,
+       &#x27;Hotchkiss&#x27;, &#x27;Lawrenceville&#x27;, &quot;St. Paul&#x27;s&quot;, &#x27;Mt. Hermon&#x27;], dtype=object)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>sample</span></div><div class='xr-var-dims'>(sample)</div><div class='xr-var-dtype'>object</div><div class='xr-var-preview xr-preview'>MultiIndex</div><input id='attrs-376c670b-6881-4176-b257-4f5bce9c247e' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-376c670b-6881-4176-b257-4f5bce9c247e' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-cb8d6787-4603-4e08-950d-5aab03cf06dc' class='xr-var-data-in' type='checkbox'><label for='data-cb8d6787-4603-4e08-950d-5aab03cf06dc' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([(0, 81), (1, 279), (0, 180), (0, 245), (2, 109), (3, 439), (1, 163),
+       (3, 77), (2, 123), (3, 240), (2, 134), (0, 215), (2, 240), (0, 347),
+       (1, 302), (0, 7), (0, 335), (1, 383), (1, 182), (1, 460), (2, 35),
+       (1, 81), (2, 51), (3, 341), (3, 210), (0, 454), (3, 104), (0, 376),
+       (0, 203), (2, 409), (1, 290), (2, 488), (1, 166), (2, 433), (1, 454),
+       (2, 396), (1, 67), (3, 378), (3, 9), (0, 389), (1, 450), (3, 108),
+       (1, 48), (0, 470), (1, 308), (2, 14), (1, 91), (3, 433), (0, 139),
+       (3, 75), (2, 139), (0, 359), (3, 204), (0, 218), (1, 165), (2, 353),
+       (1, 339), (1, 404), (1, 374), (3, 13), (2, 411), (2, 400), (2, 403),
+       (3, 169), (1, 53), (1, 122), (2, 439), (2, 451), (1, 483), (1, 116),
+       (0, 494), (2, 200), (0, 143), (3, 207), (0, 396), (0, 197), (2, 7),
+       (0, 231), (1, 69), (2, 187), (3, 435), (2, 384), (0, 223), (3, 397),
+       (2, 283), (3, 110), (3, 184), (2, 184), (2, 100), (2, 236), (2, 220),
+       (3, 466), (1, 156), (1, 54), (2, 437), (3, 441), (2, 404), (0, 438),
+       (0, 35), (3, 118)], dtype=object)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>chain</span></div><div class='xr-var-dims'>(sample)</div><div class='xr-var-dtype'>int64</div><div class='xr-var-preview xr-preview'>0 1 0 0 2 3 1 3 ... 1 1 2 3 2 0 0 3</div><input id='attrs-7c39cdcb-b14d-4fc3-a661-625ddce1c195' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-7c39cdcb-b14d-4fc3-a661-625ddce1c195' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-c18878ff-4e68-4de5-9063-9c2ab2fac838' class='xr-var-data-in' type='checkbox'><label for='data-c18878ff-4e68-4de5-9063-9c2ab2fac838' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([0, 1, 0, 0, 2, 3, 1, 3, 2, 3, 2, 0, 2, 0, 1, 0, 0, 1, 1, 1, 2, 1, 2, 3,
+       3, 0, 3, 0, 0, 2, 1, 2, 1, 2, 1, 2, 1, 3, 3, 0, 1, 3, 1, 0, 1, 2, 1, 3,
+       0, 3, 2, 0, 3, 0, 1, 2, 1, 1, 1, 3, 2, 2, 2, 3, 1, 1, 2, 2, 1, 1, 0, 2,
+       0, 3, 0, 0, 2, 0, 1, 2, 3, 2, 0, 3, 2, 3, 3, 2, 2, 2, 2, 3, 1, 1, 2, 3,
+       2, 0, 0, 3])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>draw</span></div><div class='xr-var-dims'>(sample)</div><div class='xr-var-dtype'>int64</div><div class='xr-var-preview xr-preview'>81 279 180 245 ... 404 438 35 118</div><input id='attrs-10c9029f-b729-4620-afc1-45fe870e4483' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-10c9029f-b729-4620-afc1-45fe870e4483' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-b843776d-4cf3-4bda-bb37-1517fa461d63' class='xr-var-data-in' type='checkbox'><label for='data-b843776d-4cf3-4bda-bb37-1517fa461d63' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([ 81, 279, 180, 245, 109, 439, 163,  77, 123, 240, 134, 215, 240, 347,
+       302,   7, 335, 383, 182, 460,  35,  81,  51, 341, 210, 454, 104, 376,
+       203, 409, 290, 488, 166, 433, 454, 396,  67, 378,   9, 389, 450, 108,
+        48, 470, 308,  14,  91, 433, 139,  75, 139, 359, 204, 218, 165, 353,
+       339, 404, 374,  13, 411, 400, 403, 169,  53, 122, 439, 451, 483, 116,
+       494, 200, 143, 207, 396, 197,   7, 231,  69, 187, 435, 384, 223, 397,
+       283, 110, 184, 184, 100, 236, 220, 466, 156,  54, 437, 441, 404, 438,
+        35, 118])</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-51e438ee-269f-4638-ad1b-a02b9cb3f87c' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-51e438ee-269f-4638-ad1b-a02b9cb3f87c' class='xr-section-summary'  title='Expand/collapse section'>Attributes: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'></dl></div></li></ul></div></div></div></div>
+</div>
+<p>To keep the chain and draw dimensions, use <code class="docutils literal notranslate"><span class="pre">combined=False</span></code>.</p>
+<div class="jupyter_cell jupyter_container docutils container">
+<div class="cell_input code_cell docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">az</span><span class="o">.</span><span class="n">extract</span><span class="p">(</span><span class="n">idata</span><span class="p">,</span> <span class="n">group</span><span class="o">=</span><span class="s2">&quot;prior&quot;</span><span class="p">,</span> <span class="n">combined</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div><svg style="position: absolute; width: 0; height: 0; overflow: hidden">
+<defs>
+<symbol id="icon-database" viewBox="0 0 32 32">
+<path d="M16 0c-8.837 0-16 2.239-16 5v4c0 2.761 7.163 5 16 5s16-2.239 16-5v-4c0-2.761-7.163-5-16-5z"></path>
+<path d="M16 17c-8.837 0-16-2.239-16-5v6c0 2.761 7.163 5 16 5s16-2.239 16-5v-6c0 2.761-7.163 5-16 5z"></path>
+<path d="M16 26c-8.837 0-16-2.239-16-5v6c0 2.761 7.163 5 16 5s16-2.239 16-5v-6c0 2.761-7.163 5-16 5z"></path>
+</symbol>
+<symbol id="icon-file-text2" viewBox="0 0 32 32">
+<path d="M28.681 7.159c-0.694-0.947-1.662-2.053-2.724-3.116s-2.169-2.030-3.116-2.724c-1.612-1.182-2.393-1.319-2.841-1.319h-15.5c-1.378 0-2.5 1.121-2.5 2.5v27c0 1.378 1.122 2.5 2.5 2.5h23c1.378 0 2.5-1.122 2.5-2.5v-19.5c0-0.448-0.137-1.23-1.319-2.841zM24.543 5.457c0.959 0.959 1.712 1.825 2.268 2.543h-4.811v-4.811c0.718 0.556 1.584 1.309 2.543 2.268zM28 29.5c0 0.271-0.229 0.5-0.5 0.5h-23c-0.271 0-0.5-0.229-0.5-0.5v-27c0-0.271 0.229-0.5 0.5-0.5 0 0 15.499-0 15.5 0v7c0 0.552 0.448 1 1 1h7v19.5z"></path>
+<path d="M23 26h-14c-0.552 0-1-0.448-1-1s0.448-1 1-1h14c0.552 0 1 0.448 1 1s-0.448 1-1 1z"></path>
+<path d="M23 22h-14c-0.552 0-1-0.448-1-1s0.448-1 1-1h14c0.552 0 1 0.448 1 1s-0.448 1-1 1z"></path>
+<path d="M23 18h-14c-0.552 0-1-0.448-1-1s0.448-1 1-1h14c0.552 0 1 0.448 1 1s-0.448 1-1 1z"></path>
+</symbol>
+</defs>
+</svg>
+<style>/* CSS stylesheet for displaying xarray objects in jupyterlab.
+ *
+ */
+
+:root {
+  --xr-font-color0: var(--jp-content-font-color0, rgba(0, 0, 0, 1));
+  --xr-font-color2: var(--jp-content-font-color2, rgba(0, 0, 0, 0.54));
+  --xr-font-color3: var(--jp-content-font-color3, rgba(0, 0, 0, 0.38));
+  --xr-border-color: var(--jp-border-color2, #e0e0e0);
+  --xr-disabled-color: var(--jp-layout-color3, #bdbdbd);
+  --xr-background-color: var(--jp-layout-color0, white);
+  --xr-background-color-row-even: var(--jp-layout-color1, white);
+  --xr-background-color-row-odd: var(--jp-layout-color2, #eeeeee);
+}
+
+html[theme=dark],
+body[data-theme=dark],
+body.vscode-dark {
+  --xr-font-color0: rgba(255, 255, 255, 1);
+  --xr-font-color2: rgba(255, 255, 255, 0.54);
+  --xr-font-color3: rgba(255, 255, 255, 0.38);
+  --xr-border-color: #1F1F1F;
+  --xr-disabled-color: #515151;
+  --xr-background-color: #111111;
+  --xr-background-color-row-even: #111111;
+  --xr-background-color-row-odd: #313131;
+}
+
+.xr-wrap {
+  display: block !important;
+  min-width: 300px;
+  max-width: 700px;
+}
+
+.xr-text-repr-fallback {
+  /* fallback to plain text repr when CSS is not injected (untrusted notebook) */
+  display: none;
+}
+
+.xr-header {
+  padding-top: 6px;
+  padding-bottom: 6px;
+  margin-bottom: 4px;
+  border-bottom: solid 1px var(--xr-border-color);
+}
+
+.xr-header > div,
+.xr-header > ul {
+  display: inline;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.xr-obj-type,
+.xr-array-name {
+  margin-left: 2px;
+  margin-right: 10px;
+}
+
+.xr-obj-type {
+  color: var(--xr-font-color2);
+}
+
+.xr-sections {
+  padding-left: 0 !important;
+  display: grid;
+  grid-template-columns: 150px auto auto 1fr 20px 20px;
+}
+
+.xr-section-item {
+  display: contents;
+}
+
+.xr-section-item input {
+  display: none;
+}
+
+.xr-section-item input + label {
+  color: var(--xr-disabled-color);
+}
+
+.xr-section-item input:enabled + label {
+  cursor: pointer;
+  color: var(--xr-font-color2);
+}
+
+.xr-section-item input:enabled + label:hover {
+  color: var(--xr-font-color0);
+}
+
+.xr-section-summary {
+  grid-column: 1;
+  color: var(--xr-font-color2);
+  font-weight: 500;
+}
+
+.xr-section-summary > span {
+  display: inline-block;
+  padding-left: 0.5em;
+}
+
+.xr-section-summary-in:disabled + label {
+  color: var(--xr-font-color2);
+}
+
+.xr-section-summary-in + label:before {
+  display: inline-block;
+  content: '►';
+  font-size: 11px;
+  width: 15px;
+  text-align: center;
+}
+
+.xr-section-summary-in:disabled + label:before {
+  color: var(--xr-disabled-color);
+}
+
+.xr-section-summary-in:checked + label:before {
+  content: '▼';
+}
+
+.xr-section-summary-in:checked + label > span {
+  display: none;
+}
+
+.xr-section-summary,
+.xr-section-inline-details {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+.xr-section-inline-details {
+  grid-column: 2 / -1;
+}
+
+.xr-section-details {
+  display: none;
+  grid-column: 1 / -1;
+  margin-bottom: 5px;
+}
+
+.xr-section-summary-in:checked ~ .xr-section-details {
+  display: contents;
+}
+
+.xr-array-wrap {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 20px auto;
+}
+
+.xr-array-wrap > label {
+  grid-column: 1;
+  vertical-align: top;
+}
+
+.xr-preview {
+  color: var(--xr-font-color3);
+}
+
+.xr-array-preview,
+.xr-array-data {
+  padding: 0 5px !important;
+  grid-column: 2;
+}
+
+.xr-array-data,
+.xr-array-in:checked ~ .xr-array-preview {
+  display: none;
+}
+
+.xr-array-in:checked ~ .xr-array-data,
+.xr-array-preview {
+  display: inline-block;
+}
+
+.xr-dim-list {
+  display: inline-block !important;
+  list-style: none;
+  padding: 0 !important;
+  margin: 0;
+}
+
+.xr-dim-list li {
+  display: inline-block;
+  padding: 0;
+  margin: 0;
+}
+
+.xr-dim-list:before {
+  content: '(';
+}
+
+.xr-dim-list:after {
+  content: ')';
+}
+
+.xr-dim-list li:not(:last-child):after {
+  content: ',';
+  padding-right: 5px;
+}
+
+.xr-has-index {
+  font-weight: bold;
+}
+
+.xr-var-list,
+.xr-var-item {
+  display: contents;
+}
+
+.xr-var-item > div,
+.xr-var-item label,
+.xr-var-item > .xr-var-name span {
+  background-color: var(--xr-background-color-row-even);
+  margin-bottom: 0;
+}
+
+.xr-var-item > .xr-var-name:hover span {
+  padding-right: 5px;
+}
+
+.xr-var-list > li:nth-child(odd) > div,
+.xr-var-list > li:nth-child(odd) > label,
+.xr-var-list > li:nth-child(odd) > .xr-var-name span {
+  background-color: var(--xr-background-color-row-odd);
+}
+
+.xr-var-name {
+  grid-column: 1;
+}
+
+.xr-var-dims {
+  grid-column: 2;
+}
+
+.xr-var-dtype {
+  grid-column: 3;
+  text-align: right;
+  color: var(--xr-font-color2);
+}
+
+.xr-var-preview {
+  grid-column: 4;
+}
+
+.xr-var-name,
+.xr-var-dims,
+.xr-var-dtype,
+.xr-preview,
+.xr-attrs dt {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-right: 10px;
+}
+
+.xr-var-name:hover,
+.xr-var-dims:hover,
+.xr-var-dtype:hover,
+.xr-attrs dt:hover {
+  overflow: visible;
+  width: auto;
+  z-index: 1;
+}
+
+.xr-var-attrs,
+.xr-var-data {
+  display: none;
+  background-color: var(--xr-background-color) !important;
+  padding-bottom: 5px !important;
+}
+
+.xr-var-attrs-in:checked ~ .xr-var-attrs,
+.xr-var-data-in:checked ~ .xr-var-data {
+  display: block;
+}
+
+.xr-var-data > table {
+  float: right;
+}
+
+.xr-var-name span,
+.xr-var-data,
+.xr-attrs {
+  padding-left: 25px !important;
+}
+
+.xr-attrs,
+.xr-var-attrs,
+.xr-var-data {
+  grid-column: 1 / -1;
+}
+
+dl.xr-attrs {
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: 125px auto;
+}
+
+.xr-attrs dt,
+.xr-attrs dd {
+  padding: 0;
+  margin: 0;
+  float: left;
+  padding-right: 10px;
+  width: auto;
+}
+
+.xr-attrs dt {
+  font-weight: normal;
+  grid-column: 1;
+}
+
+.xr-attrs dt:hover span {
+  display: inline-block;
+  background: var(--xr-background-color);
+  padding-right: 10px;
+}
+
+.xr-attrs dd {
+  grid-column: 2;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+.xr-icon-database,
+.xr-icon-file-text2 {
+  display: inline-block;
+  vertical-align: middle;
+  width: 1em;
+  height: 1.5em !important;
+  stroke-width: 0;
+  stroke: currentColor;
+  fill: currentColor;
+}
+</style><pre class='xr-text-repr-fallback'>&lt;xarray.Dataset&gt;
+Dimensions:    (chain: 1, draw: 500, school: 8)
+Coordinates:
+  * chain      (chain) int64 0
+  * draw       (draw) int64 0 1 2 3 4 5 6 7 ... 492 493 494 495 496 497 498 499
+  * school     (school) object &#x27;Choate&#x27; &#x27;Deerfield&#x27; ... &#x27;Mt. Hermon&#x27;
+Data variables:
+    tau        (chain, draw) float64 6.561 1.016 68.91 ... 1.56 5.949 0.7631
+    tau_log__  (chain, draw) float64 1.881 0.01593 4.233 ... 1.783 -0.2704
+    mu         (chain, draw) float64 5.293 0.8137 0.7122 ... -1.658 -3.273
+    theta      (chain, draw, school) float64 2.357 7.371 7.251 ... -3.775 -3.555
+    obs        (chain, draw, school) float64 -3.54 6.769 19.68 ... -21.16 -6.071
+Attributes:
+    created_at:                 2019-06-21T17:36:34.490387
+    inference_library:          pymc3
+    inference_library_version:  3.7</pre><div class='xr-wrap' style='display:none'><div class='xr-header'><div class='xr-obj-type'>xarray.Dataset</div></div><ul class='xr-sections'><li class='xr-section-item'><input id='section-e171dc0c-e249-4466-a15f-0288f8162697' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-e171dc0c-e249-4466-a15f-0288f8162697' class='xr-section-summary'  title='Expand/collapse section'>Dimensions:</label><div class='xr-section-inline-details'><ul class='xr-dim-list'><li><span class='xr-has-index'>chain</span>: 1</li><li><span class='xr-has-index'>draw</span>: 500</li><li><span class='xr-has-index'>school</span>: 8</li></ul></div><div class='xr-section-details'></div></li><li class='xr-section-item'><input id='section-88f02621-c4a0-43bd-bd91-bf2b7e3a679e' class='xr-section-summary-in' type='checkbox'  checked><label for='section-88f02621-c4a0-43bd-bd91-bf2b7e3a679e' class='xr-section-summary' >Coordinates: <span>(3)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>chain</span></div><div class='xr-var-dims'>(chain)</div><div class='xr-var-dtype'>int64</div><div class='xr-var-preview xr-preview'>0</div><input id='attrs-8b6fde36-3bbe-4770-84a5-3eeffb5bfbad' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-8b6fde36-3bbe-4770-84a5-3eeffb5bfbad' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-4c18324f-c169-4d3d-ad7c-289981f8e6dd' class='xr-var-data-in' type='checkbox'><label for='data-4c18324f-c169-4d3d-ad7c-289981f8e6dd' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([0])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>draw</span></div><div class='xr-var-dims'>(draw)</div><div class='xr-var-dtype'>int64</div><div class='xr-var-preview xr-preview'>0 1 2 3 4 5 ... 495 496 497 498 499</div><input id='attrs-2f3f2bd2-48ce-434b-b1cf-5eb3d6bf8216' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-2f3f2bd2-48ce-434b-b1cf-5eb3d6bf8216' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-d1d13579-b3fc-4161-848a-f4eff6aa3420' class='xr-var-data-in' type='checkbox'><label for='data-d1d13579-b3fc-4161-848a-f4eff6aa3420' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([  0,   1,   2, ..., 497, 498, 499])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>school</span></div><div class='xr-var-dims'>(school)</div><div class='xr-var-dtype'>object</div><div class='xr-var-preview xr-preview'>&#x27;Choate&#x27; ... &#x27;Mt. Hermon&#x27;</div><input id='attrs-c9a9029a-4d84-4927-be82-645ec9f68f5a' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-c9a9029a-4d84-4927-be82-645ec9f68f5a' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-e9b48128-9fd9-41ac-8ef4-49db7b53e1b4' class='xr-var-data-in' type='checkbox'><label for='data-e9b48128-9fd9-41ac-8ef4-49db7b53e1b4' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([&#x27;Choate&#x27;, &#x27;Deerfield&#x27;, &#x27;Phillips Andover&#x27;, &#x27;Phillips Exeter&#x27;,
+       &#x27;Hotchkiss&#x27;, &#x27;Lawrenceville&#x27;, &quot;St. Paul&#x27;s&quot;, &#x27;Mt. Hermon&#x27;], dtype=object)</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-dfae2952-63fa-4166-a956-0ea4338ad78b' class='xr-section-summary-in' type='checkbox'  checked><label for='section-dfae2952-63fa-4166-a956-0ea4338ad78b' class='xr-section-summary' >Data variables: <span>(5)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>tau</span></div><div class='xr-var-dims'>(chain, draw)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-0c3dd00d-e8ae-412e-aff9-09362a33c0f6' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-0c3dd00d-e8ae-412e-aff9-09362a33c0f6' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-7b12888e-3d85-4314-af74-92f45674da41' class='xr-var-data-in' type='checkbox'><label for='data-7b12888e-3d85-4314-af74-92f45674da41' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([[ 6.560633,  1.016055, 68.91391 , ...,  1.560098,  5.948734,  0.763063]])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>tau_log__</span></div><div class='xr-var-dims'>(chain, draw)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-f4f2a7ed-e04e-4805-bc69-69131ec1fe3c' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-f4f2a7ed-e04e-4805-bc69-69131ec1fe3c' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-67447a43-e0a0-4e71-8ba6-29daa864b719' class='xr-var-data-in' type='checkbox'><label for='data-67447a43-e0a0-4e71-8ba6-29daa864b719' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([[ 1.881087,  0.015927,  4.232858, ...,  0.444748,  1.783178, -0.270415]])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>mu</span></div><div class='xr-var-dims'>(chain, draw)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-4422de22-2a29-468c-bb8e-c98a20dc9c69' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-4422de22-2a29-468c-bb8e-c98a20dc9c69' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-ccd6dd7c-565e-4b70-87bf-6ff3795486de' class='xr-var-data-in' type='checkbox'><label for='data-ccd6dd7c-565e-4b70-87bf-6ff3795486de' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([[ 5.29345 ,  0.813724,  0.712223, ..., -0.979857, -1.657547, -3.272668]])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>theta</span></div><div class='xr-var-dims'>(chain, draw, school)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-3a885db4-e56c-475d-914a-e882421aabb6' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-3a885db4-e56c-475d-914a-e882421aabb6' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-2b0d27db-5293-48a5-9fc5-a0753bc3fb00' class='xr-var-data-in' type='checkbox'><label for='data-2b0d27db-5293-48a5-9fc5-a0753bc3fb00' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([[[ 2.357357,  7.371371, ...,  6.135082,  3.984435],
+        [ 0.258399, -0.752515, ...,  1.73084 , -0.034163],
+        ...,
+        [-4.353289,  2.194643, ..., -7.819076, -6.21613 ],
+        [-4.131344, -4.093318, ..., -3.775218, -3.555126]]])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>obs</span></div><div class='xr-var-dims'>(chain, draw, school)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>...</div><input id='attrs-18ff6ec7-5751-42c7-a637-dc1ff1747c7f' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-18ff6ec7-5751-42c7-a637-dc1ff1747c7f' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-e80f619b-8234-4a86-a5ed-838de2a16b96' class='xr-var-data-in' type='checkbox'><label for='data-e80f619b-8234-4a86-a5ed-838de2a16b96' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([[[ -3.539971,   6.769448, ...,   8.26964 ,  -8.569042],
+        [-21.166369,   1.14605 , ..., -13.157913,  -8.5424  ],
+        ...,
+        [ 29.354582,  -5.511382, ..., -17.892521,  46.28878 ],
+        [ -6.379747,   6.538907, ..., -21.155214,  -6.070767]]])</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-7eb67e30-ddf6-4c5a-8ef9-31772ecd092e' class='xr-section-summary-in' type='checkbox'  checked><label for='section-7eb67e30-ddf6-4c5a-8ef9-31772ecd092e' class='xr-section-summary' >Attributes: <span>(3)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'><dt><span>created_at :</span></dt><dd>2019-06-21T17:36:34.490387</dd><dt><span>inference_library :</span></dt><dd>pymc3</dd><dt><span>inference_library_version :</span></dt><dd>3.7</dd></dl></div></li></ul></div></div></div></div>
+</div>
+</dd></dl>
+
+</section>
+
+
+              </article>
+              
+
+              
+              <footer class="bd-footer-article">
+                  <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+  <a class='left-prev' id="prev-link" href="arviz.concat.html" title="previous page">
+      <i class="fas fa-angle-left"></i>
+      <div class="prev-next-info">
+          <p class="prev-next-subtitle">previous</p>
+          <p class="prev-next-title">arviz.concat</p>
+      </div>
+  </a>
+  <a class='right-next' id="next-link" href="arviz.list_datasets.html" title="next page">
+  <div class="prev-next-info">
+      <p class="prev-next-subtitle">next</p>
+      <p class="prev-next-title">arviz.list_datasets</p>
+  </div>
+  <i class="fas fa-angle-right"></i>
+  </a>
+</div>
+              </footer>
+              
+          </div>
+          
+  
+
+      </div>
+    </div>
+
+  
+
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/pydata-sphinx-theme.js?digest=92025949c220c2e29695"></script>
+
+
+<script>
+  $(document).ready(function () {
+    const content = $('<div class="alert-danger">ArviZ docs will now be available at <a href="https://python.arviz.org">python.arviz.org</a>!</div>')
+    $('#banner').append(content);
+  })
+</script>
+
+<footer class="bd-footer"><div class="bd-footer__inner container">
+  
+  <div class="footer-item">
+    <p class="copyright">
+    &copy; Copyright 2018, ArviZ devs.<br>
+</p>
+  </div>
+  
+  <div class="footer-item">
+    <p class="sphinx-version">
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 4.5.0.<br>
+</p>
+  </div>
+  
+</div>
+</footer>
+  </body>
+</html>
